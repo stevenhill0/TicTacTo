@@ -1,23 +1,22 @@
-  const button   = document.querySelector('.calculator-keys'),
-        screen = document.getElementById('screen');    
+  const button     = document.querySelector('.calculator-keys'),
+        screen     = document.getElementById('screen');    
+        
   let   firstValue,  
         secondValue,  
         thirdValue;  
 
         
-
     calculator = function ( event ) {  
 
       if( event.target.closest('button') ){
 
-        const key = event.target;
-        const keyValue = key.textContent;
-        const operators = ['+' , '-' , '*', '/']; 
+        const key = event.target,
+              keyValue = key.textContent,
+              operators = ['+' , '-' , '*', '/'],
+              hasOperators = operators.some(operator => keyValue.includes(operator));
        
 
       if( screen.value === '0' ){
-      
-       let hasOperators = operators.some(operator => keyValue.includes(operator));
 
           if( !hasOperators  ){ 
         
@@ -30,16 +29,12 @@
 
       } else {
        
-      let hasOperators = operators.some(operator => keyValue.includes(operator));
-      
-      
       if( hasOperators ){
 
         secondValue = keyValue;
         screen.value = screen.value + ' ' + secondValue ;
       
         console.log(secondValue );
-       
        
       } else {
        
@@ -59,11 +54,14 @@
         
         calculate(firstValue, secondValue, thirdValue);
 
-      
                                                      } 
-            
        } 
-                                     
+        
+       if( key.classList.contains('all-clear') ){
+
+        screen.value = '0';
+
+       }
     }
   
     };
