@@ -3,7 +3,8 @@
         
   let   firstValue,  
         secondValue,  
-        thirdValue;  
+        thirdValue,
+        beenCalculated = false;  
 
         
     calculator = function ( event ) {  
@@ -15,59 +16,46 @@
               operators = ['+' , '-' , '*', '/'],
               hasOperators = operators.some(operator => keyValue.includes(operator));
        
+      // START CONDITIONALS
+      if( screen.value === '0' || beenCalculated === true ){
 
-      if( screen.value === '0' ){
-
-          if( !hasOperators  ){ 
+          if( key.classList.contains('key')  ){  firstValue = keyValue; screen.value = firstValue;
         
-          firstValue = keyValue;
-          screen.value = firstValue;
-
           console.log(firstValue );
 
           }   
 
       } else {
        
-      if( hasOperators ){
+                  if( hasOperators ){ secondValue = keyValue; screen.value = screen.value + ' ' + secondValue ;
+                  
+                    console.log(secondValue );
+                  
+                  } else {
+                  
+                  if( !key.classList.contains('equal-sign') ) { thirdValue = keyValue; screen.value = screen.value + ' ' + thirdValue ;
+                  
+                      console.log(thirdValue );
+                  
+                  }
+            
+                  
+                        }
 
-        secondValue = keyValue;
-        screen.value = screen.value + ' ' + secondValue ;
-      
-        console.log(secondValue );
-       
-      } else {
-       
-        if( !key.classList.contains('equal-sign') ) {  
+                  if(  key.classList.contains('equal-sign') ) calculate(  hasBeenCalculated, firstValue, secondValue, thirdValue );
 
-          thirdValue = keyValue;
-          screen.value = screen.value + ' ' + thirdValue ;
-         
-          console.log(thirdValue );
-         
-        }
-     
-       
-             }
-
-        if(  key.classList.contains('equal-sign') ) {
+                                                            
+            } 
         
-        calculate(firstValue, secondValue, thirdValue);
-
-                                                     } 
-       } 
-        
-       if( key.classList.contains('all-clear') ){
-
-        screen.value = '0';
-
-       }
+       if( key.classList.contains('all-clear') ) screen.value = '0';
+       //END CONDITIONALS
+       
     }
   
     };
 
  
-    calculate = function( firstValue = '', secondValue = '', thirdValue = '' ){
+      calculate = function(callBackFunction , firstValue = '', secondValue = '', thirdValue = '' ){
         
                 let firstNumber =  parseInt(firstValue);
                 let thirdNumber =  parseInt(thirdValue);
@@ -77,11 +65,16 @@
                 if(secondValue.includes('*') ) screen.value = firstNumber * thirdNumber;
                 if(secondValue.includes('/') ) screen.value = firstNumber / thirdNumber;
                
+                callBackFunction();
                 return screen.value;
 
           };
                          
+     hasBeenCalculated = function(){
 
+           return beenCalculated === true ;
+
+     };
 
 
 
