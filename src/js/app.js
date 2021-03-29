@@ -33,7 +33,7 @@
       // START CONDITIONALS
       if( screen.value === '0' || beenCalculated === true ){
 
-          if( key.classList.contains('key')  ){ numberObj.valueOne = keyValue; screen.value = firstValue;
+          if( key.classList.contains('key')  ){ firstValue = keyValue; screen.value = firstValue;
             
             // firstValueArray.push(firstValue);
             // numberObj.valueOne = firstValue ;
