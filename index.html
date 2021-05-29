@@ -6,46 +6,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="src/css/style.css">
-  <title>Calculator</title>
+  <title>Battleships</title>
 </head>
 <body>
-  <div class="calculator">
 
-    <input id="screen" type="text" class="calculator-screen" value="0" disabled />
-  
-    <div class="calculator-keys">
-  
-      <button type="button" class="operator" value="+">+</button>
-      <button type="button" class="operator" value="-">-</button>
-      <button type="button" class="operator" value="*">*</button>
-      <button type="button" class="operator" value="/">/</button>
-  
-      <button id ="seven" class="key" type="button" value="7">7</button>
-      <button id ="eight" class="key" type="button" value="8">8</button>
-      <button id ="nine" class="key" type="button" value="9">9</button>
-  
-  
-      <button id ="four" class="key" type="button" value="4">4</button>
-      <button id ="five" class="key" type="button" value="5">5</button>
-      <button id ="six"  class="key" type="button" value="6">6</button>
-  
-  
-      <button id ="one"   class="key" type="button" value="1">1</button>
-      <button id ="two"   class="key" type="button" value="2">2</button>
-      <button id ="three" class="key" type="button" value="3">3</button>
-  
-  
-      <button id ="zero" class="key" type="button" value="0">0</button>
-      <button type="button" class="decimal" value=".">.</button>
-      <button type="button" class="all-clear" value="all-clear">AC</button>
-  
-      <button type="button" class="equal-sign" value="=">=</button>
-  
+  <div class="grid-container">
+    <div class="outer-grid">
+      <div class="outer-square">
+        <div class="inner-grid">
+          <div class="inner-square" value="one"></div>
+        </div>
+        <div class="inner-grid">
+          <div class="inner-square" value="two"></div>
+        </div>
+        <div class="inner-grid">
+          <div class="inner-square" value="three"></div>
+        </div>
+        <div class="inner-grid">
+          <div class="inner-square" value="four"></div>
+        </div>
+        <div class="inner-grid">
+          <div class="inner-square" value="five"></div>
+        </div>
+        <div class="inner-grid">
+          <div class="inner-square" value="six"></div>
+        </div>
+        <div class="inner-grid">
+          <div class="inner-square" value="seven"></div>
+        </div>
+        <div class="inner-grid">
+          <div class="inner-square" value="eight"></div>
+        </div>
+        <div class="inner-grid">
+          <div class="inner-square" value="nine"></div>
+        </div>
+      </div>
     </div>
-  </div>
-
-
   
-  <script src="src/js/app.js"></script>
+  <!-- <script src="src/js/app.js"></script> -->
+  <script type ="module" src="src/js/app2.js"></script>
+  <script  src="src/js/tictactoe.js"></script>
+
 </body>
 </html>

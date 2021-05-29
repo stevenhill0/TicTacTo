@@ -1,53 +1,52 @@
-  const button     = document.querySelector('.calculator-keys'),
-        screen     = document.getElementById('screen');    
+var guess,
+    guesses = 0,
+    hits = 0,
+    location1 = Math.floor(Math.random()*5);
+    location2 = location1 +1,
+    location3 = location2 +1,
+    isSunk = false;
+
+    //loop while not sunk
+    while ( isSunk == false ) {
+     
+     //prompt to enter a number 
+    guess  = prompt('Insert any number between 0-6 and try sink MY battleship!: ');
+
+     //validate guess: only between 0-6
+     if( guess < 0 || guess > 6 ){
+         alert('Please insert a valid number.');
+     } else {
+
+        //add 1 to guesses
+            guesses = guesses +1;
+
+        // assign guess to locations 1-3
+       if(guess == location1 || guess == location2 || guess == location3 ){
         
-  let   firstValue,  
-        secondValue,  
-        total = [],  
+         //Add Hit
+         hits = hits + 1; 
 
-        
-    calculator = function ( event ) { 
+         //Alert Hit
+         alert('HIT');
 
-      if( event.target.closest('button') ){
+        //if hits = 3 change sunk to true. Send an alert you have sunk ship
+        if( hits == 3 ){
 
-        const key = event.target,
-              keyValue = key.textContent;
-            
-      // START CONDITIONALS
-      if( screen.value === '0' && !key.classList.contains('equal-sign') && !key.classList.contains('all-clear') ){
-         
-          total = [];
-          
-          firstValue = keyValue; 
-          screen.value = firstValue;
-        
-          total.push(firstValue); 
+           isSunk = true;
+           alert('You have SUNK MY Battleship!!!');
 
-      } else {
-                  if( !key.classList.contains('equal-sign') ){
+                       }
+            } else {
 
-                  secondValue = keyValue; 
-                  screen.value = screen.value + ' ' + secondValue;
-
-                  total.push(secondValue);  
+            alert('MISS!');
                 
-                  }
-                     
-
-                  if(  key.classList.contains('equal-sign') ) {
-                  
-                  let joinedArrayTotal = total.join('');
-               
-                  let final = eval(joinedArrayTotal);
-                  screen.value = final;
+                    }
+            }  
        
-                  }
-        
-                    if( key.classList.contains('all-clear')  ) screen.value = '0'; 
-                        
-            } // END CONDITIONALS
-      }
-    };
+    }
 
-         //addEventListener is what passes the event object: we can call the parameter/argument anything we want
-         button.addEventListener('click', calculator, false);
+     // give guess stats (by grabbing guess value) and alert it out
+     var stats = 'It took you ' + guesses + ' guesses to sink MY Battleship.' + ' Your average of hits is ' + (3/guesses*100) +'%' ;
+     alert(stats);
+      
+    
