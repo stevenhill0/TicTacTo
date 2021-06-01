@@ -40,20 +40,21 @@ div {
   display: table-cell;
   text-align: center;
   vertical-align: middle;
+  cursor: pointer;
 }
 
 .nought {
-
-  background-image: url("../img/nought.png");
-  background-repeat:no-repeat;
+  background-image: url('../img/nought.png');
+  background-repeat: no-repeat;
   background-position: center;
-
 }
 
 .cross {
-
-  background-image: url("../img/cross.png");
-  background-repeat:no-repeat;
+  background-image: url('../img/cross.png');
+  background-repeat: no-repeat;
   background-position: center;
+}
 
+.checked {
+  pointer-events: none;
 }
