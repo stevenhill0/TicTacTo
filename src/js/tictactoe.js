@@ -141,17 +141,20 @@ const resetGame = () => {
   const button = document.querySelector('.reset');
   const squares = document.getElementsByClassName('inner-square');
 
-  button.addEventListener('click', () => {
-    const classes = ['nought', 'cross', 'checked'];
+  button.addEventListener(
+    'click',
+    setTimeout(() => {
+      const classes = ['nought', 'cross', 'checked'];
 
-    for (let square of squares) {
-      square.classList.remove(...classes);
-    }
+      for (let square of squares) {
+        square.classList.remove(...classes);
+      }
 
-    buttonWrapper.classList.add('displayNone', 'retry');
+      buttonWrapper.classList.add('displayNone', 'retry');
 
-    clearData();
-  });
+      clearData();
+    }, 1500)
+  );
 };
 
 const clearData = () => {
