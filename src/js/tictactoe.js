@@ -6,9 +6,9 @@ const selectSquare = () => {
   const squares = document.getElementsByClassName('inner-square');
 
   for (let square of squares) {
-    square.addEventListener('click', (event) =>
-      addImageToSquare(square, event)
-    );
+    square.addEventListener('click', (event) => {
+      addImageToSquare(square, event);
+    });
   }
 };
 
@@ -21,6 +21,20 @@ const addImageToSquare = (square, event) => {
   }
 
   saveGuess(clickedSquare);
+  addSounds(clickedSquare);
+};
+
+const addSounds = (clickedSquare, winner) => {
+  const setDownImage = new Audio('./src/audio/set-down.wav').play();
+  const youWin = new Audio('./src/audio/you-win.wav');
+
+  if (clickedSquare) {
+    setDownImage;
+  }
+
+  if (winner) {
+    youWin.play();
+  }
 };
 
 const saveGuess = (clickedSquare) => {
@@ -46,17 +60,22 @@ const parseGuesses = () => {
   playerTwo.forEach((element, index) => (crosses[element] = index));
 
   for (let pattern of patterns) {
+    const winner = true;
     const result = pattern.every((element) => noughts[element] !== undefined);
 
     if (result) {
-      console.log('NOUGHTS WINS');
+      addSounds(null, winner);
+      endGame();
     }
   }
 
   for (let pattern of patterns) {
+    const winner = true;
     const result = pattern.every((element) => crosses[element] !== undefined);
+
     if (result) {
-      console.log('CROSSES WINS');
+      addSounds(null, winner);
+      endGame();
     }
   }
 };
@@ -84,6 +103,13 @@ const data = {
 };
 
 const playerTurn = () => {
+  const buttonWrapper = document.querySelector('.overlay');
+  if (
+    data.playerOneGuesses.length === 0 &&
+    buttonWrapper.classList.contains('retry')
+  ) {
+    return 'playerOne';
+  }
   if (data.active.playerOne === true) {
     data.active.playerOne = false;
     data.active.playerTwo = true;
@@ -95,6 +121,44 @@ const playerTurn = () => {
 
     return 'playerTwo';
   }
+};
+
+const endGame = () => {
+  const squares = document.getElementsByClassName('inner-square');
+  const buttonWrapper = document.querySelector('.overlay');
+
+  buttonWrapper.classList.remove('displayNone');
+
+  for (let square of squares) {
+    square.classList.add('checked');
+  }
+
+  resetGame();
+};
+
+const resetGame = () => {
+  const buttonWrapper = document.querySelector('.overlay');
+  const button = document.querySelector('.reset');
+  const squares = document.getElementsByClassName('inner-square');
+
+  button.addEventListener('click', () => {
+    const classes = ['nought', 'cross', 'checked'];
+
+    for (let square of squares) {
+      square.classList.remove(...classes);
+    }
+
+    buttonWrapper.classList.add('displayNone', 'retry');
+
+    clearData();
+  });
+};
+
+const clearData = () => {
+  data.playerOneGuesses.splice(0, data.playerOneGuesses.length);
+  data.playerTwoGuesses.splice(0, data.playerTwoGuesses.length);
+  data.noughts = {};
+  data.crosses = {};
 };
 
 startGame();

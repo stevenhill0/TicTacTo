@@ -6,13 +6,24 @@ div {
   overflow: hidden;
   box-sizing: border-box;
 }
+
+.grid-container {
+  width: 500px;
+  height: 500px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -250px;
+  margin-left: -250px;
+}
+
 .outer-grid {
   position: relative;
   float: left;
-  width: 33.3%;
-  padding-bottom: 33.3%;
+  width: 100%;
+  padding-bottom: 100%;
   border: 1px solid gray;
-  background-color: #9cc;
+  background-color: black;
 }
 .outer-square {
   position: absolute;
@@ -30,7 +41,7 @@ div {
 .inner-grid {
   width: 33.3%;
   height: 33.3%;
-  border: 1px solid red;
+  border: 1px solid black;
   display: table;
 }
 .inner-square {
@@ -44,17 +55,85 @@ div {
 }
 
 .nought {
-  background-image: url('../img/nought.png');
+  background-image: url('../img/nought2.png');
   background-repeat: no-repeat;
   background-position: center;
 }
 
 .cross {
-  background-image: url('../img/cross.png');
+  background-image: url('../img/cross2.png');
   background-repeat: no-repeat;
   background-position: center;
 }
 
 .checked {
   pointer-events: none;
+}
+
+.retry {
+  margin: 0;
+}
+
+.displayNone {
+  display: none;
+}
+
+.button {
+  position: relative;
+  background-color: #0396fd;
+  border-radius: 25px;
+  font-size: large;
+  color: black;
+  padding: 20px;
+  width: 200px;
+  text-align: center;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.button:after {
+  content: '';
+  background: #90ee90;
+  display: block;
+  position: absolute;
+  padding-top: 300%;
+  padding-left: 350%;
+  margin-left: -20px !important;
+  margin-top: -120%;
+  opacity: 0;
+  transition: all 0.8s;
+}
+
+.button:active:after {
+  padding: 0;
+  margin: 0;
+  opacity: 1;
+  transition: 0s;
+}
+.container {
+  margin-top: 10%;
+  height: 200px;
+  position: relative;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+.overlay {
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  top: 0;
+}
+.content {
+  height: 100px;
+  background: black;
 }
