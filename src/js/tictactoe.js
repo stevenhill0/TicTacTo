@@ -1,3 +1,6 @@
+import { addSounds, removeClasses, clearData } from './helper.js';
+import { data } from './data.js';
+
 const startGame = () => {
   selectSquare();
 };
@@ -22,19 +25,6 @@ const addImageToSquare = (square, event) => {
 
   saveGuess(clickedSquare);
   addSounds(clickedSquare);
-};
-
-const addSounds = (clickedSquare, winner) => {
-  const setDownImage = new Audio('./src/audio/set-down.wav').play();
-  const youWin = new Audio('./src/audio/you-win.wav');
-
-  if (clickedSquare) {
-    setDownImage;
-  }
-
-  if (winner) {
-    youWin.play();
-  }
 };
 
 const saveGuess = (clickedSquare) => {
@@ -80,42 +70,19 @@ const parseGuesses = () => {
   }
 };
 
-const data = {
-  patterns: [
-    ['one', 'two', 'three'],
-    ['four', 'five', 'six'],
-    ['seven', 'eight', 'nine'],
-    ['one', 'four', 'seven'],
-    ['two', 'five', 'eight'],
-    ['three', 'six', 'nine'],
-    ['three', 'five', 'seven'],
-    ['three', 'five', 'seven'],
-    ['one', 'five', 'nine'],
-  ],
-  active: {
-    playerOne: true,
-    playerTwo: true,
-  },
-  playerOneGuesses: [],
-  playerTwoGuesses: [],
-  noughts: {},
-  crosses: {},
-};
-
 const playerTurn = () => {
-  const buttonWrapper = document.querySelector('.overlay');
-  if (
-    data.playerOneGuesses.length === 0 &&
-    buttonWrapper.classList.contains('retry')
-  ) {
+  const buttonWrapper = document.querySelector('.overlay').classList;
+
+  if (data.playerOneGuesses.length === 0 && buttonWrapper.contains('retry')) {
     return 'playerOne';
   }
-  if (data.active.playerOne === true) {
+
+  if (data.active.playerOne) {
     data.active.playerOne = false;
     data.active.playerTwo = true;
 
     return 'playerOne';
-  } else if (data.active.playerTwo === true) {
+  } else if (data.active.playerTwo) {
     data.active.playerTwo = false;
     data.active.playerOne = true;
 
@@ -141,27 +108,11 @@ const resetGame = () => {
   const button = document.querySelector('.reset');
   const squares = document.getElementsByClassName('inner-square');
 
-  button.addEventListener(
-    'click',
-    setTimeout(() => {
-      const classes = ['nought', 'cross', 'checked'];
+  button.addEventListener('click', () => {
+    setTimeout(removeClasses, 1300, squares, buttonWrapper);
+  });
 
-      for (let square of squares) {
-        square.classList.remove(...classes);
-      }
-
-      buttonWrapper.classList.add('displayNone', 'retry');
-
-      clearData();
-    }, 1500)
-  );
-};
-
-const clearData = () => {
-  data.playerOneGuesses.splice(0, data.playerOneGuesses.length);
-  data.playerTwoGuesses.splice(0, data.playerTwoGuesses.length);
-  data.noughts = {};
-  data.crosses = {};
+  clearData();
 };
 
 startGame();
