@@ -2,17 +2,73 @@ import { addSounds, removeClasses, clearData } from './helper.js';
 import { data } from './data.js';
 
 const startGame = () => {
-  selectSquare();
+  // selectSquare();
+  setImage();
 };
 
-const selectSquare = () => {
-  const squares = document.getElementsByClassName('inner-square');
+//Click to add image
+// const selectSquare = () => {
+//   const squares = document.getElementsByClassName('inner-square');
 
-  for (let square of squares) {
-    square.addEventListener('click', (event) => {
-      addImageToSquare(square, event);
+//   for (let square of squares) {
+//     square.addEventListener('click', (event) => {
+//       addImageToSquare(square, event);
+//     });
+//   }
+// };
+
+let imageTurn = true;
+const switchImages = () => {
+  const turn = imageTurn;
+  imageTurn = !imageTurn;
+
+  return turn;
+};
+//get Image for Drop Image function
+const getImage = () => {
+  const images = [...document.querySelectorAll('.draggable')];
+  const turn = switchImages();
+
+  images.forEach((image) => {
+    const images = image;
+    return images;
+  });
+
+  const image = turn ? images[0] : images[1];
+  image.addEventListener('dragstart', (e) => {
+    e.dataTransfer.setData('text', e.target.id);
+    e.dataTransfer.effectAllowed = 'copy';
+  });
+};
+
+//Drag and Drop to add image
+const setImage = () => {
+  const squares = [...document.getElementsByClassName('inner-square')];
+
+  squares.forEach((square) => {
+    square.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      e.target.classList.add('drag-over');
+      e.dataTransfer.dropEffect = 'copy';
     });
-  }
+
+    square.addEventListener('drop', (e) => {
+      e.target.classList.remove('drag-over');
+      // clone the draggable element
+      const id = e.dataTransfer.getData('text');
+      const nodeCopy = document.getElementById(id).cloneNode(true);
+
+      // add it to the drop target
+      nodeCopy.id = 'newId';
+      e.target.appendChild(nodeCopy);
+
+      // display the draggable element
+      nodeCopy.classList.add('displayNone');
+      addImageToSquare(square, e);
+    });
+  });
+
+  getImage();
 };
 
 const addImageToSquare = (square, event) => {

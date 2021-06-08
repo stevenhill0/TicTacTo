@@ -137,3 +137,16 @@ div {
   height: 100px;
   background: black;
 }
+
+.draggable {
+  cursor: grab;
+  margin-top: 100px;
+  margin-left: 150px;
+}
+
+.drag-over {
+  cursor: grab;
+  /* border: dashed; */
+  /* border-color: green;
+  background-color: white; */
+}
