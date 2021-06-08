@@ -6,35 +6,10 @@ const startGame = () => {
   setImage();
 };
 
-//Click to add image
-// const selectSquare = () => {
-//   const squares = document.getElementsByClassName('inner-square');
-
-//   for (let square of squares) {
-//     square.addEventListener('click', (event) => {
-//       addImageToSquare(square, event);
-//     });
-//   }
-// };
-
-let imageTurn = true;
-const switchImages = () => {
-  const turn = imageTurn;
-  imageTurn = !imageTurn;
-
-  return turn;
-};
 //get Image for Drop Image function
 const getImage = () => {
-  const images = [...document.querySelectorAll('.draggable')];
-  const turn = switchImages();
+  const image = document.querySelector('.draggable');
 
-  images.forEach((image) => {
-    const images = image;
-    return images;
-  });
-
-  const image = turn ? images[0] : images[1];
   image.addEventListener('dragstart', (e) => {
     e.dataTransfer.setData('text', e.target.id);
     e.dataTransfer.effectAllowed = 'copy';
